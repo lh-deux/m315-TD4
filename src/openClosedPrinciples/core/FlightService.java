@@ -2,6 +2,7 @@ package openClosedPrinciples.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,6 +45,11 @@ public class FlightService {
 		Stream<Flight> results = parallelStream.filter(f -> 
 		             f.match(d, from, to))  ;
 		return results.collect(Collectors.toCollection(ArrayList::new));
+	}
+	
+	public List<Flight> sortedByPrice() {
+		flights.sort(Comparator.comparing(Flight::getPrice));
+		return flights;
 	}
 	
 	
