@@ -1,4 +1,4 @@
-package openClosedPrinciples.core;
+package td4.util;
 
 /**
  * 

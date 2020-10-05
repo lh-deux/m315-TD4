@@ -1,4 +1,4 @@
-package openClosedPrinciples.core;
+package td4.flights;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

@@ -1,4 +1,4 @@
-package openClosedPrinciples.core;
+package td4.cars;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import td4.util.NotPossibleCarRentalException;
+
 
 
 

@@ -1,8 +1,11 @@
-package openClosedPrinciples.core;
+package td4.cars;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import td4.util.DateTools;
+import td4.util.NotPossibleCarRentalException;
 
 /**
  *

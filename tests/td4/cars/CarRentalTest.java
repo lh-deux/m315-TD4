@@ -1,10 +1,14 @@
-package openClosedPrinciples.core;
+package td4.cars;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import td4.cars.Car;
+import td4.cars.CarRental;
+import td4.util.DateTools;
 
 
 class CarRentalTest {

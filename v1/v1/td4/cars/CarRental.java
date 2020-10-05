@@ -1,6 +1,8 @@
-package openClosedPrinciples.core;
+package v1.td4.cars;
 
 import java.time.LocalDate;
+
+import td4.core.PayingItem;
 
 /**
  * 
@@ -14,7 +16,7 @@ import java.time.LocalDate;
  * @author blay
  *
  */
-public class CarRental {
+public class CarRental implements PayingItem {
 
 	private Car car;
 	private double dayPrice;
