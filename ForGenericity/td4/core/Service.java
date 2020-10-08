@@ -22,8 +22,11 @@ public class Service<T extends PayingItem> {
 		return new ArrayList<T>(payingItemList);
 	}
 
+	private void sortedByPriceInPlace() {
+		payingItemList.sort(Comparator.comparing(PayingItem::getPrice));
+	}
 	public T lessExpensiveItem() {
-		sortedByPrice();
+		sortedByPriceInPlace();
 		return payingItemList.get(0);
 	}
 
