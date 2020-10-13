@@ -66,6 +66,7 @@ public class CarRentalService {
 	
 	
 	/**
+	 * It books the car rental and returns the created {@code CarRental} 
 	 * @param c : {@code Car} for rent
 	 * @param fromDate : {@code LocalDate} first day for rental
 	 * @param numberOfDays 

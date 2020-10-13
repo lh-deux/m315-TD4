@@ -52,7 +52,7 @@ public class FlightService {
 	 */
 	public List<Flight> sortedByPrice() {
 		flights.sort(Comparator.comparing(Flight::getPrice));
-		return new ArrayList<Flight>(flights);
+		return new ArrayList<>(flights);
 	}
 
 }
