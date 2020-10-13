@@ -6,10 +6,10 @@ import java.util.List;
 
 import td4.core.PayingItem;
 
-public class Service<T extends PayingItem> {
+public class Service4PI<T extends PayingItem> {
 	protected List<T> payingItemList = new ArrayList<>();
 
-	public Service(List<T> payingItemList) {
+	public Service4PI(List<T> payingItemList) {
 		this.payingItemList = payingItemList;
 	}
 

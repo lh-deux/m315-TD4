@@ -19,6 +19,7 @@ public class FlightServiceTest {
 	private static final LocalDate dateToTest = LocalDate.of(2017, 12, 24);
 	
 	FlightService service ;
+	
 	@Before
 	public void setUp() {
 		ArrayList<Flight> list = new ArrayList<>();
@@ -49,6 +50,11 @@ public class FlightServiceTest {
 	
 	@Test
 	public void testSortedByPrice() {
+		ArrayList<Flight> list = new ArrayList<>();
+		list.add(new Flight(100, dateToTest, LocalTime.of(7, 45),NICE, PARIS));
+		list.add(new Flight(20, dateToTest, LocalTime.of(9, 30), NICE, PARIS));
+		list.add(new Flight(150, dateToTest, LocalTime.of(18, 30), PARIS, NICE));
+		service = new FlightService(list);
 		List<Flight> flights = service.sortedByPrice();
 		assertEquals(20,flights.get(0).getPrice(),0.01);
 		assertEquals(100,flights.get(1).getPrice(),0.01);
