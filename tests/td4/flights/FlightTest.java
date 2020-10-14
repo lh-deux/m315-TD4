@@ -7,6 +7,7 @@ import java.time.LocalTime;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import td4.flights.Flight;
 
@@ -14,7 +15,7 @@ public class FlightTest {
 
 	
 	Flight f1 ;
-	@Before
+	@BeforeEach
 	public void setUp() {
 		f1 = new Flight(100, LocalDate.of(2017,11,11), LocalTime.of(7, 45),"Nice","Paris");
 	}
