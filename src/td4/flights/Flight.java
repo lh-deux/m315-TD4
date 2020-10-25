@@ -1,5 +1,7 @@
 package td4.flights;
 
+import td4.core.Product;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Random;
@@ -15,7 +17,7 @@ import java.util.Random;
  *
  *
  */
-public class Flight {
+public class Flight implements Product {
 
 	private static final   int NOT_ASSIGNED = -1;
 	private static final   String DEFAULT_DESTINATION= "Paris";
@@ -79,7 +81,7 @@ public class Flight {
 			double random = new Random().nextDouble();
 			price = start + (random * (end - start));
 		}
-		return price;
+		return PRODUCT_MARGIN*price;
 	}
 
 	/**

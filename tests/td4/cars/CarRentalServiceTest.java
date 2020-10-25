@@ -1,22 +1,22 @@
 package td4.cars;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import td4.util.NotPossibleCarRentalException;
 
 
 
 
-
-public class CarRentalServiceTest {
+class CarRentalServiceTest {
 
 	CarRentalService service ; 
 	Car myCar0 = new Car("1111 AB 06",50);
@@ -24,7 +24,7 @@ public class CarRentalServiceTest {
 	Car myCar2 = new Car("1111 AB 83",75);
 	LocalDate currentDate;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		 myCar0 = new Car("1111 AB 06",50);
 		 myCar1 = new Car("1111 AB 75",100);
@@ -34,7 +34,7 @@ public class CarRentalServiceTest {
 	}
 
 	@Test
-	public void testGetAvailableCars() throws NotPossibleCarRentalException {
+	void testGetAvailableCars() throws NotPossibleCarRentalException {
 		LocalDate current = LocalDate.of(2020,9,11);
 		List<Car> possibleCars = 
 				service.getAvailableCars(current, 2);
@@ -59,7 +59,7 @@ public class CarRentalServiceTest {
 	
 	
 	@Test
-	public void testBookAnAvalaibleCar() throws NotPossibleCarRentalException {
+	void testBookAnAvalaibleCar() throws NotPossibleCarRentalException {
 		CarRental carRental = service.book(myCar0,LocalDate.of(2018,9,11), 2);
 		assertFalse(carRental==null);
 		List<Car> possibleCars =  service.getAvailableCars(LocalDate.of(2018,9,11), 1);
@@ -81,15 +81,15 @@ public class CarRentalServiceTest {
 	
 	
 	@Test
-	public void testBookANonAvalaibleCar() throws NotPossibleCarRentalException {
+	void testBookANonAvalaibleCar() throws NotPossibleCarRentalException {
 		CarRental carRental = service.book(myCar0,LocalDate.of(2020,9,11), 2);
-		assertFalse(carRental==null);
+		assertNotNull(carRental);
 		carRental = service.book(myCar0,LocalDate.of(2020,9,12), 2);
-		assertTrue(carRental==null);
+		assertNull(carRental);
 	}
 	
 	@Test
-	public void testGetNotAvailableCars() throws NotPossibleCarRentalException {
+	void testGetNotAvailableCars() throws NotPossibleCarRentalException {
 		service.book(myCar0,LocalDate.of(2020,9,11), 2);
 		List<Car> possibleCars = service.getAvailableCars(LocalDate.of(2020,9,11), 2);
 		assertEquals(2, possibleCars.size());

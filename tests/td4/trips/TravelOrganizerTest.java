@@ -1,15 +1,20 @@
-package finalSolution;
+package td4.trips;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import td4.cars.Car;
+import td4.cars.CarRentalService;
+import td4.core.Description;
+import td4.flights.Flight;
+import td4.flights.FlightService;
+
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 
 class TravelOrganizerTest {
@@ -64,7 +69,7 @@ class TravelOrganizerTest {
 	void testcreateATripwithCars() {
 		initcars();
 		Trip trip = travelOrganizer.createATrip(description);
-		assertTrue(trip != null);
+		assertNotNull(trip);
 		assertEquals(2, trip.getProducts().size());
 	}
 
@@ -72,8 +77,8 @@ class TravelOrganizerTest {
 	void testcreateATripwithFlight() {
 		initFlights();
 		Trip trip = travelOrganizer.createATrip(description);
-		//System.out.println(trip.getProducts());
-		assertTrue(trip != null);
+		System.out.println(trip.getProducts());
+		assertNotNull(trip);
 		assertEquals(1, trip.getProducts().size());
 		assertEquals(niceParis, trip.getProducts().get(0));
 		description = new Description(LocalDate.now(), "Nice", "Paris", 3);

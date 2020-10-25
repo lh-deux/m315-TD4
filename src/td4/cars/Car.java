@@ -1,6 +1,7 @@
 package td4.cars;
 
 
+import java.util.Objects;
 
 /**
  * This class defines the notion of a car to be rented by associating it with a price per day.
@@ -39,5 +40,18 @@ public class Car {
 		return "Car [numberPlate=" + numberPlate + // ", rentals=" + rentals + 
 				", dayPrice=" + dayPrice + "]";
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Car car = (Car) o;
+		return Double.compare(car.dayPrice, dayPrice) == 0 &&
+				numberPlate.equals(car.numberPlate);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(numberPlate, dayPrice);
+	}
 }

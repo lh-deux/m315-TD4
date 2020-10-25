@@ -1,14 +1,14 @@
 package td4.flights;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
 
@@ -17,10 +17,10 @@ public class FlightServiceTest {
 	private static final String PARIS = "Paris";
 	private static final String NICE = "Nice";
 	private static final LocalDate dateToTest = LocalDate.of(2017, 12, 24);
-	
+	private static final double PRODUCT_MARGIN = 1.03;
 	FlightService service ;
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ArrayList<Flight> list = new ArrayList<>();
 		list.add(new Flight("Belfort"));
@@ -56,9 +56,13 @@ public class FlightServiceTest {
 		list.add(new Flight(150, dateToTest, LocalTime.of(18, 30), PARIS, NICE));
 		service = new FlightService(list);
 		List<Flight> flights = service.sortedByPrice();
-		assertEquals(20,flights.get(0).getPrice(),0.01);
-		assertEquals(100,flights.get(1).getPrice(),0.01);
-		assertEquals(150,flights.get(2).getPrice(),0.01);
+		assertNotEquals(20,flights.get(0).getPrice(),0.01);
+		assertNotEquals(100,flights.get(1).getPrice(),0.01);
+		assertNotEquals(150,flights.get(2).getPrice(),0.01);
+		assertEquals(PRODUCT_MARGIN*20,flights.get(0).getPrice(),0.01);
+
+		assertEquals(PRODUCT_MARGIN*100,flights.get(1).getPrice(),0.01);
+		assertEquals(PRODUCT_MARGIN*150,flights.get(2).getPrice(),0.01);
 	}
 
 }

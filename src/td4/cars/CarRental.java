@@ -1,5 +1,7 @@
 package td4.cars;
 
+import td4.core.Product;
+
 import java.time.LocalDate;
 
 /**
@@ -14,13 +16,12 @@ import java.time.LocalDate;
  * @author blay
  *
  */
-public class CarRental {
+public class CarRental implements Product {
 
 	private Car car;
 	private double dayPrice;
 	private int duration;
 	private LocalDate beginDate;
-	
 	
 	private CarRental(Car car, double dayPrice, int duration, LocalDate beginDate) {
 		super();
@@ -73,7 +74,7 @@ public class CarRental {
 	}
 	
 	public double getPrice() {
-		return dayPrice*duration;
+		return PRODUCT_MARGIN*dayPrice*duration;
 	}
 
 	/**

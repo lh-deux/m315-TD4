@@ -2,8 +2,14 @@ package td4.cars;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import td4.Service;
+import td4.core.Description;
+import td4.core.Product;
+import td4.core.Service4PI;
+import td4.flights.FlightService;
 import td4.util.DateTools;
 import td4.util.NotPossibleCarRentalException;
 
@@ -17,22 +23,14 @@ import td4.util.NotPossibleCarRentalException;
  *
  * 
  */
-public class CarRentalService {
+public class CarRentalService extends FlightService implements Service {
 
 	//Set of cars for rent
 	private List<Car> cars;
-	
-	//All registered car rentals
-	private List<CarRental> carRentals = new ArrayList<>();
-
-
-
-	
-
 
 	//To create a car rental service,  you need to have cars.
 	public CarRentalService(List<Car> cars) {
-		super();
+		super(new ArrayList<>());
 		this.cars = cars;
 	}
 
@@ -55,7 +53,7 @@ public class CarRentalService {
 	
 
 	private boolean isAvailable(Car c, LocalDate[] dates) {
-		for (CarRental carRental : carRentals) {
+		for (CarRental carRental : payingItemList) {
 			if (c.equals(carRental.getCar()) &&
 				(carRental.includeADate(dates)) ) {
 				return false;	
@@ -63,8 +61,7 @@ public class CarRentalService {
 		}
 		return true;
 	}
-	
-	
+
 	
 	/**
 	 * It books the car rental and returns the created {@code CarRental} 
@@ -81,11 +78,34 @@ public class CarRentalService {
 		LocalDate[] dates = DateTools.getDays(fromDate, numberOfDays);
 		if (isAvailable(c, dates)) {
 			carRental = new CarRental(c, fromDate, numberOfDays);
-			carRentals.add(carRental);
+			payingItemList.add(carRental);
 		}
 		return carRental;
 	}
-	
-	
 
+
+	public CarRental find(Description desc) {
+		//on récupère les voitures déjà disponibles
+		List<Car> carDispos = getAvailableCars(desc.getDateDepart(),desc.getDuree());
+		List<CarRental> locationsDispos = new ArrayList<>();
+		if(carDispos.size() != 0){
+			for(Car c : carDispos){
+				for(CarRental cr: payingItemList){
+					if(cr.getCar().equals(c) && !locationsDispos.contains(cr)){
+						locationsDispos.add(cr);
+						carDispos.remove(c);
+					}
+				}
+				try{
+					CarRental b = book(c,desc.getDateDepart(),desc.getDuree());
+					locationsDispos.add(b);
+				}
+				catch(NotPossibleCarRentalException e){
+					System.err.println(e.getMessage());
+				}
+			}
+		}
+		locationsDispos.sort(Comparator.comparing(Product::getPrice));
+		return locationsDispos.get(0);
+	}
 }

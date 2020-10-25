@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import td4.core.PayingItem;
-
-public class Service4PI<T extends PayingItem> {
+public abstract class Service4PI<T extends Product> {
 	protected List<T> payingItemList = new ArrayList<>();
 
 	public Service4PI(List<T> payingItemList) {
@@ -18,16 +16,21 @@ public class Service4PI<T extends PayingItem> {
 	}
 
 	public List<T> sortedByPrice() {
-		payingItemList.sort(Comparator.comparing(PayingItem::getPrice));
-		return new ArrayList<T>(payingItemList);
+		payingItemList.sort(Comparator.comparing(Product::getPrice));
+		return new ArrayList<>(payingItemList);
 	}
 
 	private void sortedByPriceInPlace() {
-		payingItemList.sort(Comparator.comparing(PayingItem::getPrice));
+		payingItemList.sort(Comparator.comparing(Product::getPrice));
 	}
 	public T lessExpensiveItem() {
 		sortedByPriceInPlace();
 		return payingItemList.get(0);
+	}
+
+	public T lessExpensiveItem(List<T> externalItemList){
+		externalItemList.sort(Comparator.comparing(Product::getPrice));
+		return externalItemList.get(0);
 	}
 
 	public void add(T payingItem) {
